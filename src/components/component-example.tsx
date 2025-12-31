@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-import { Example, ExampleWrapper } from "@/src/components/example";
+import { Example, ExampleWrapper } from "@/components/example";
 import {
     AlertDialog,
     AlertDialogAction,
@@ -14,9 +14,9 @@ import {
     AlertDialogMedia,
     AlertDialogTitle,
     AlertDialogTrigger,
-} from "@/src/components/ui/alert-dialog";
-import { Badge } from "@/src/components/ui/badge";
-import { Button } from "@/src/components/ui/button";
+} from "@/components/ui/alert-dialog";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
     Card,
     CardAction,
@@ -25,7 +25,7 @@ import {
     CardFooter,
     CardHeader,
     CardTitle,
-} from "@/src/components/ui/card";
+} from "@/components/ui/card";
 import {
     Combobox,
     ComboboxContent,
@@ -33,7 +33,7 @@ import {
     ComboboxInput,
     ComboboxItem,
     ComboboxList,
-} from "@/src/components/ui/combobox";
+} from "@/components/ui/combobox";
 import {
     DropdownMenu,
     DropdownMenuCheckboxItem,
@@ -50,9 +50,9 @@ import {
     DropdownMenuSubContent,
     DropdownMenuSubTrigger,
     DropdownMenuTrigger,
-} from "@/src/components/ui/dropdown-menu";
-import { Field, FieldGroup, FieldLabel } from "@/src/components/ui/field";
-import { Input } from "@/src/components/ui/input";
+} from "@/components/ui/dropdown-menu";
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
 import {
     Select,
     SelectContent,
@@ -60,8 +60,8 @@ import {
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from "@/src/components/ui/select";
-import { Textarea } from "@/src/components/ui/textarea";
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
 import {
     BellIcon,
     BluetoothIcon,
