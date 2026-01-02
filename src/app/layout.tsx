@@ -84,7 +84,7 @@ export default function RootLayout({
                         </nav>
                     </header>
 
-                    <main className="mt-[81px] pt-[31px]">{children}</main>
+                    <main className="mt-[81px]">{children}</main>
 
                     <footer className="bg-primary text-white">
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-10">
@@ -110,12 +110,12 @@ export default function RootLayout({
                                     </h5>
                                     <ul className="space-y-4 text-sm text-white/80 font-medium">
                                         <li>
-                                            <a
+                                            <Link
                                                 className="hover:text-white transition hover:underline decoration-white/30 underline-offset-4"
-                                                href="#"
+                                                href="/classes"
                                             >
                                                 Classes
-                                            </a>
+                                            </Link>
                                         </li>
                                     </ul>
                                 </div>

@@ -11,7 +11,7 @@ import {
 export default function Page() {
     return (
         <>
-            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <section className="max-w-7xl mx-auto pt-[31px] px-4 sm:px-6 lg:px-8">
                 <div className="h-[85vh] min-h-[600px] relative rounded-3xl shadow-2xl shadow-primary/20 overflow-hidden flex items-center justify-center">
                     <div className="absolute inset-0 z-0">
                         <img
@@ -151,17 +151,6 @@ export default function Page() {
                         <p className="text-lg text-gray-600 dark:text-gray-400 font-normal mb-8">
                             Select a class format that fits your schedule.
                         </p>
-                        <div className="bg-gray-100 dark:bg-gray-800 p-1.5 rounded-full inline-flex">
-                            <button className="px-6 py-2.5 rounded-full bg-primary text-white text-sm font-bold shadow-md transition-all">
-                                All
-                            </button>
-                            <button className="px-6 py-2.5 rounded-full text-gray-500 dark:text-gray-300 hover:text-primary dark:hover:text-white text-sm font-bold transition-colors">
-                                In Person
-                            </button>
-                            <button className="px-6 py-2.5 rounded-full text-gray-500 dark:text-gray-300 hover:text-primary dark:hover:text-white text-sm font-bold transition-colors">
-                                Online
-                            </button>
-                        </div>
                     </div>
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                         <ClassesTypeCard
@@ -173,6 +162,7 @@ export default function Page() {
                             platform="Live via zoom"
                             fee="$200"
                             isUpcoming={true}
+                            classLink="/classes/1"
                         />
                         <ClassesTypeCard
                             type="online"
@@ -183,6 +173,7 @@ export default function Page() {
                             platform="Live via zoom"
                             fee="$300"
                             isUpcoming={true}
+                            classLink="/classes/1"
                         />
                         <ClassesTypeCard
                             type="in-person"
@@ -193,6 +184,7 @@ export default function Page() {
                             location="North Branch"
                             fee="$400"
                             isUpcoming={true}
+                            classLink="/classes/1"
                         />
                     </div>
                     <div className="mt-12 text-center">

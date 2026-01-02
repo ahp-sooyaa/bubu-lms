@@ -2,6 +2,7 @@ import {
     Card,
     CardAction,
     CardContent,
+    CardFooter,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
@@ -15,6 +16,8 @@ import {
     Video,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge";
+import Link from "next/link";
 
 interface ClassesLocationCardProps extends React.ComponentProps<"div"> {
     title: string;
@@ -36,12 +39,12 @@ function ClassesLocationCard({
     return (
         <Card
             className={cn(
-                "bg-white dark:bg-surface-dark py-8 rounded-3xl shadow-soft hover:shadow-xl transition duration-300 border border-transparent hover:border-primary/20 group flex flex-col h-full ring-0",
+                "bg-white dark:bg-surface-dark py-6 rounded-3xl shadow-soft hover:shadow-xl transition duration-300 border border-transparent hover:border-primary/20 group flex flex-col h-full ring-0",
                 className,
             )}
             {...props}
         >
-            <CardHeader className="px-8">
+            <CardHeader className="px-6">
                 <div className="flex justify-between items-start">
                     <CardTitle className="text-2xl font-display font-bold text-gray-900 dark:text-white group-hover:text-primary transition">
                         {title}
@@ -51,7 +54,7 @@ function ClassesLocationCard({
                     </div>
                 </div>
             </CardHeader>
-            <CardContent className="px-8">
+            <CardContent className="px-6">
                 <p className="text-gray-500 dark:text-gray-400 text-sm mb-8 leading-relaxed font-medium">
                     {description}
                 </p>
@@ -78,7 +81,7 @@ function ClassesLocationCard({
                     </div>
                 </div>
             </CardContent>
-            <CardAction className="px-8 pt-2 mt-auto">
+            <CardAction className="px-6 pt-2 mt-auto">
                 <a
                     className="inline-flex items-center text-sm font-bold text-primary hover:text-primary-light transition group/link"
                     href={actionLink}
@@ -107,6 +110,7 @@ interface ClassesTypeCardProps extends React.ComponentProps<"div"> {
     platform?: string;
     fee: string;
     isUpcoming: boolean;
+    classLink: string;
 }
 
 function ClassesTypeCard({
@@ -119,31 +123,30 @@ function ClassesTypeCard({
     platform,
     fee,
     isUpcoming,
+    classLink,
     className,
     ...props
 }: ClassesTypeCardProps) {
     return (
         <Card
             className={cn(
-                "bg-white dark:bg-surface-dark rounded-3xl py-8 flex flex-col h-full shadow-lg border border-gray-100 dark:border-gray-700 hover:border-primary/30 transition-all duration-300 ring-0 gap-8",
+                "bg-white dark:bg-surface-dark rounded-3xl py-6 flex flex-col h-full shadow-lg border border-gray-100 dark:border-gray-700 hover:border-primary/30 transition-all duration-300 ring-0 gap-8",
                 className,
             )}
             {...props}
         >
-            <CardHeader className="px-8 gap-6">
+            <CardHeader className="px-6 gap-6">
                 <div className="flex justify-between items-center">
-                    <span className="inline-block px-3 py-1 rounded-md bg-primary/10 dark:bg-primary/20 text-xs font-bold tracking-wide uppercase text-primary dark:text-primary-light">
-                        {type.toUpperCase().replace("-", " ")}
-                    </span>
+                    <Badge>{type.toUpperCase().replace("-", " ")}</Badge>
                     <span className="text-xs font-bold text-primary/60">
                         {code}
                     </span>
                 </div>
                 <CardTitle className="text-2xl font-display font-bold text-gray-900 dark:text-white leading-snug tracking-tight">
-                    {title}
+                    <Link href={classLink}>{title}</Link>
                 </CardTitle>
             </CardHeader>
-            <CardContent className="px-8">
+            <CardContent className="px-6">
                 <div className="space-y-6 grow">
                     <div className="flex gap-4">
                         <div className="w-10 h-10 rounded-full bg-primary/5 flex items-center justify-center shrink-0">
@@ -207,8 +210,8 @@ function ClassesTypeCard({
                     </div>
                 </div>
             </CardContent>
-            <CardAction className="px-8 pt-2 mt-auto w-full">
-                <div className="border-t border-gray-100 dark:border-gray-700 pt-6 flex items-center justify-between">
+            <CardFooter className="px-6 pt-2 mt-auto">
+                <div className="border-t border-gray-100 dark:border-gray-700 pt-6 flex items-center justify-between w-full">
                     <div>
                         <p className="text-[11px] uppercase tracking-wider text-gray-400 font-bold mb-1">
                             Tuition
@@ -227,7 +230,7 @@ function ClassesTypeCard({
                         </button>
                     )}
                 </div>
-            </CardAction>
+            </CardFooter>
         </Card>
     );
 }
@@ -248,7 +251,7 @@ function ReviewCard({
     return (
         <Card
             className={cn(
-                "bg-white dark:bg-surface-dark py-8 rounded-3xl shadow-sm hover:shadow-lg transition-shadow duration-300 relative ring-0",
+                "bg-white dark:bg-surface-dark py-6 rounded-3xl shadow-sm hover:shadow-lg transition-shadow duration-300 relative ring-0",
                 className,
             )}
             {...props}
@@ -256,7 +259,7 @@ function ReviewCard({
             <div className="text-primary/20 absolute top-6 right-8">
                 <Quote fill="currentColor" stroke="none" size="40" />
             </div>
-            <CardContent className="px-8">
+            <CardContent className="px-6">
                 <p className="text-gray-600 dark:text-gray-300 mt-12 mb-8 relative z-10 font-medium text-lg leading-relaxed">
                     {content}
                 </p>
