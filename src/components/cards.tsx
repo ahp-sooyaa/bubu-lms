@@ -18,6 +18,7 @@ import {
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
+import { EnrollmentForm, WaitlistForm } from "@/components/forms";
 
 interface ClassesLocationCardProps extends React.ComponentProps<"div"> {
     title: string;
@@ -220,15 +221,7 @@ function ClassesTypeCard({
                             {fee}
                         </p>
                     </div>
-                    {isUpcoming ? (
-                        <button className="px-6 py-2.5 bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-200 dark:border-gray-600 hover:border-primary hover:text-primary rounded-full text-sm font-bold transition-all">
-                            Join Wait List
-                        </button>
-                    ) : (
-                        <button className="px-6 py-2.5 bg-primary hover:bg-[#165B48] text-white rounded-full text-sm font-bold transition-all shadow-lg shadow-primary/20">
-                            Enroll Now
-                        </button>
-                    )}
+                    {isUpcoming ? <WaitlistForm /> : <EnrollmentForm />}
                 </div>
             </CardFooter>
         </Card>
