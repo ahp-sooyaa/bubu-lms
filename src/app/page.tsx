@@ -8,7 +8,7 @@ import {
     ReviewCard,
 } from "@/components/cards";
 
-export default function Page() {
+export default async function Page() {
     return (
         <>
             <section className="max-w-7xl mx-auto pt-[31px] px-4 sm:px-6 lg:px-8">
