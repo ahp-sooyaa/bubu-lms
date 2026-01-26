@@ -29,7 +29,7 @@ export default function RootLayout({
     return (
         <ClerkProvider>
             <html lang="en">
-                <body className={`${inter.variable} antialiased`}>
+                <body className={`${inter.variable} antialiased bg-secondary`}>
                     <header className="fixed top-0 w-full z-50 bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800">
                         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                             <div className="flex justify-between items-center h-20">

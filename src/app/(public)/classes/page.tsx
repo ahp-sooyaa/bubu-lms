@@ -7,8 +7,12 @@ import {
 } from "@/components/ui/input-group";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { db } from "@/db/drizzle";
+import { classTable } from "@/db/schema";
 
-export default function Page() {
+export default async function Page() {
+    const classes = await db.select().from(classTable).limit(10);
+
     return (
         <>
             <section className="relative py-16 md:py-20 bg-primary overflow-hidden">
@@ -79,66 +83,27 @@ export default function Page() {
                     </div>
                     <TabsContent value="all">
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            <ClassesTypeCard
-                                type="online"
-                                code="MKT-203"
-                                title="Digital Marketing Strategy 3"
-                                startDate="May 22, 2024"
-                                schedule="Tue, Thu • 07:00 PM"
-                                platform="Live via zoom"
-                                fee="$200"
-                                isUpcoming={true}
-                                classLink="/classes/1"
-                            />
-                            <ClassesTypeCard
-                                type="in-person"
-                                code="MKT-203"
-                                title="Digital Marketing Strategy 3"
-                                startDate="May 22, 2024"
-                                schedule="Tue, Thu • 07:00 PM"
-                                location="Downtown Campus"
-                                fee="$200"
-                                isUpcoming={true}
-                                classLink="/classes/1"
-                            />
-                            <ClassesTypeCard
-                                type="online"
-                                code="MKT-203"
-                                title="Digital Marketing Strategy 3"
-                                startDate="April 22, 2024"
-                                schedule="Tue, Thu • 07:00 PM"
-                                platform="Live via zoom"
-                                fee="$200"
-                                isUpcoming={false}
-                                classLink="/classes/1"
-                            />
-                            <ClassesTypeCard
-                                type="online"
-                                code="MKT-203"
-                                title="Digital Marketing Strategy 3"
-                                startDate="May 22, 2024"
-                                schedule="Tue, Thu • 07:00 PM"
-                                platform="Live via zoom"
-                                fee="$200"
-                                isUpcoming={true}
-                                classLink="/classes/1"
-                            />
-                            <ClassesTypeCard
-                                type="in-person"
-                                code="MKT-203"
-                                title="Digital Marketing Strategy 3"
-                                startDate="April 22, 2024"
-                                schedule="Tue, Thu • 07:00 PM"
-                                location="Downtown Campus"
-                                fee="$200"
-                                isUpcoming={false}
-                                classLink="/classes/1"
-                            />
+                            {classes.map((cls) => (
+                                <ClassesTypeCard
+                                    key={cls.id}
+                                    classId={cls.id}
+                                    type={cls.type as "in-person" | "online"}
+                                    code="MKT-203"
+                                    title={cls.title}
+                                    startDate="May 22, 2024"
+                                    schedule="Tue, Thu • 07:00 PM"
+                                    location="Downtown Campus"
+                                    fee="$200"
+                                    isUpcoming={cls.status === "upcoming"}
+                                    classLink={`/classes/${cls.id}`}
+                                />
+                            ))}
                         </div>
                     </TabsContent>
                     <TabsContent value="in-person">
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             <ClassesTypeCard
+                                classId={123}
                                 type="in-person"
                                 code="MKT-203"
                                 title="Digital Marketing Strategy 3"
@@ -150,6 +115,7 @@ export default function Page() {
                                 classLink="/classes/1"
                             />
                             <ClassesTypeCard
+                                classId={123}
                                 type="in-person"
                                 code="MKT-203"
                                 title="Digital Marketing Strategy 3"
@@ -165,6 +131,7 @@ export default function Page() {
                     <TabsContent value="online">
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             <ClassesTypeCard
+                                classId={123}
                                 type="online"
                                 code="MKT-203"
                                 title="Digital Marketing Strategy 3"
@@ -176,6 +143,7 @@ export default function Page() {
                                 classLink="/classes/1"
                             />
                             <ClassesTypeCard
+                                classId={123}
                                 type="online"
                                 code="MKT-203"
                                 title="Digital Marketing Strategy 3"
@@ -187,6 +155,7 @@ export default function Page() {
                                 classLink="/classes/1"
                             />
                             <ClassesTypeCard
+                                classId={123}
                                 type="online"
                                 code="MKT-203"
                                 title="Digital Marketing Strategy 3"

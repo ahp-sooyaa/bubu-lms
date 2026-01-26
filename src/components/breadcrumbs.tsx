@@ -7,6 +7,7 @@ import {
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Fragment } from "react";
+import { clsx } from "clsx";
 
 interface BreadcrumbItem {
     label: string;
@@ -15,24 +16,49 @@ interface BreadcrumbItem {
 
 interface BreadcrumbsProps {
     items: BreadcrumbItem[];
+    background?: "dark" | "light";
+    className?: string;
 }
 
-function Breadcrumbs({ items }: BreadcrumbsProps) {
+function Breadcrumbs({
+    items,
+    background = "dark",
+    className,
+}: BreadcrumbsProps) {
     return (
-        <Breadcrumb>
-            <BreadcrumbList className="flex items-center gap-2 text-white/60 dark:text-gray-400 text-sm font-medium">
+        <Breadcrumb className={className}>
+            <BreadcrumbList
+                className={clsx(
+                    "flex items-center gap-2 text-sm font-medium",
+                    background === "dark"
+                        ? "text-white/60 dark:text-gray-400"
+                        : "text-gray-500",
+                )}
+            >
                 {items.map((item, index) => (
                     <Fragment key={index}>
                         <BreadcrumbItem>
                             {item.href ? (
                                 <BreadcrumbLink
-                                    className="hover:text-white transition"
+                                    className={clsx(
+                                        "transition",
+                                        background === "dark"
+                                            ? "hover:text-white"
+                                            : "hover:text-gray-900",
+                                    )}
                                     href={item.href}
                                 >
                                     {item.label}
                                 </BreadcrumbLink>
                             ) : (
-                                <BreadcrumbPage className="text-white font-medium">
+                                <BreadcrumbPage
+                                    className={clsx(
+                                        "font-medium",
+                                        background === "dark"
+                                            ? "text-white"
+                                            : "text-gray-900",
+                                    )}
+                                >
                                     {item.label}
                                 </BreadcrumbPage>
                             )}
@@ -40,29 +66,6 @@ function Breadcrumbs({ items }: BreadcrumbsProps) {
                         {index < items.length - 1 && <BreadcrumbSeparator />}
                     </Fragment>
                 ))}
-                {/*<BreadcrumbItem>
-                    <BreadcrumbLink
-                        className="hover:text-white transition"
-                        href="/"
-                    >
-                        Home
-                    </BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                    <BreadcrumbLink
-                        className="hover:text-white transition"
-                        href="/classes"
-                    >
-                        Classes
-                    </BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                    <BreadcrumbPage className="text-white font-medium">
-                        Advanced React Development
-                    </BreadcrumbPage>
-                </BreadcrumbItem>*/}
             </BreadcrumbList>
         </Breadcrumb>
     );

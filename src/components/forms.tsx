@@ -26,14 +26,18 @@ import {
 } from "@/components/ui/field";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Input } from "@/components/ui/input";
-import { createPaymentReceipt } from "@/actions/payment-receipt-action";
-import { waitListAction } from "@/actions/wait-list-action";
+import {
+    createClassApplication,
+    createWaitlistApplication,
+} from "@/actions/class-application";
 
-function EnrollmentForm() {
-    const paymentAmount = 499;
-    const createPaymentReceiptAction = createPaymentReceipt.bind(
+function EnrollmentForm({ classId }: { classId: number }) {
+    const amount = 499;
+
+    const createClassApplicationWithIds = createClassApplication.bind(
         null,
-        paymentAmount,
+        classId,
+        amount,
     );
 
     return (
@@ -43,7 +47,7 @@ function EnrollmentForm() {
             </DialogTrigger>
             <DialogContent className="overflow-hidden min-w-[600px]">
                 <form
-                    action={createPaymentReceiptAction}
+                    action={createClassApplicationWithIds}
                     className="grid gap-6"
                 >
                     <DialogHeader>
@@ -168,14 +172,21 @@ function EnrollmentForm() {
     );
 }
 
-function WaitlistForm() {
+function WaitlistForm({ classId }: { classId: number }) {
+    const createWaitlistApplicationWithIds = createWaitlistApplication.bind(
+        null,
+        classId,
+    );
     return (
         <Dialog>
             <DialogTrigger className="px-6 py-2.5 bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-200 dark:border-gray-600 hover:border-primary hover:text-primary rounded-full text-sm font-bold transition-all">
                 Join Wait List
             </DialogTrigger>
             <DialogContent className="overflow-hidden">
-                <form action={waitListAction} className="grid gap-6">
+                <form
+                    action={createWaitlistApplicationWithIds}
+                    className="grid gap-6"
+                >
                     <DialogHeader>
                         <div className="mx-auto sm:mx-0 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 mb-4">
                             <BellRing size={20} className="text-primary" />

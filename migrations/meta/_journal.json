@@ -5,22 +5,15 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1767514193132,
-      "tag": "0000_fat_maddog",
+      "when": 1768272065922,
+      "tag": "0000_fearless_night_thrasher",
       "breakpoints": true
     },
     {
       "idx": 1,
       "version": "7",
-      "when": 1767515204911,
-      "tag": "0001_shiny_ultron",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1767516867618,
-      "tag": "0002_free_krista_starr",
+      "when": 1769344797498,
+      "tag": "0001_public_scrambler",
       "breakpoints": true
     }
   ]

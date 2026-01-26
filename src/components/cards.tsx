@@ -102,6 +102,7 @@ function ClassesLocationCard({
 }
 
 interface ClassesTypeCardProps extends React.ComponentProps<"div"> {
+    classId: number;
     title: string;
     type: "in-person" | "online";
     code: string;
@@ -115,6 +116,7 @@ interface ClassesTypeCardProps extends React.ComponentProps<"div"> {
 }
 
 function ClassesTypeCard({
+    classId,
     title,
     type,
     code,
@@ -221,7 +223,11 @@ function ClassesTypeCard({
                             {fee}
                         </p>
                     </div>
-                    {isUpcoming ? <WaitlistForm /> : <EnrollmentForm />}
+                    {isUpcoming ? (
+                        <WaitlistForm classId={classId} />
+                    ) : (
+                        <EnrollmentForm classId={classId} />
+                    )}
                 </div>
             </CardFooter>
         </Card>

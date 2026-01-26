@@ -7,8 +7,18 @@ import {
     ClassesTypeCard,
     ReviewCard,
 } from "@/components/cards";
+import { classTable } from "@/db/schema";
+import { db } from "@/db/drizzle";
+import { eq } from "drizzle-orm";
 
 export default async function Page() {
+    const latestUpcomingClasses = await db
+        .select()
+        .from(classTable)
+        .limit(3)
+        .where(eq(classTable.status, "upcoming"));
+    console.log(latestUpcomingClasses);
+
     return (
         <>
             <section className="max-w-7xl mx-auto pt-[31px] px-4 sm:px-6 lg:px-8">
@@ -153,7 +163,42 @@ export default async function Page() {
                         </p>
                     </div>
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                        <ClassesTypeCard
+                        {latestUpcomingClasses.length > 0 ? (
+                            latestUpcomingClasses.map((classItem) => (
+                                <ClassesTypeCard
+                                    classId={classItem.id}
+                                    key={classItem.id}
+                                    type={
+                                        classItem.type as "online" | "in-person"
+                                    }
+                                    code="MKT-203"
+                                    title={classItem.title}
+                                    startDate={new Date(
+                                        classItem.startDate,
+                                    ).toLocaleDateString("en-US", {
+                                        year: "numeric",
+                                        month: "long",
+                                        day: "numeric",
+                                    })}
+                                    schedule={classItem.startTime}
+                                    platform={
+                                        classItem.type === "online"
+                                            ? "Live via zoom"
+                                            : "Campus Classroom"
+                                    }
+                                    location="North Branch"
+                                    fee="$200"
+                                    isUpcoming={classItem.status === "upcoming"}
+                                    classLink={`/classes/${classItem.id}`}
+                                />
+                            ))
+                        ) : (
+                            <p className="text-center text-gray-500 dark:text-gray-400 col-span-3">
+                                No upcoming classes available at the moment.
+                            </p>
+                        )}
+                        {/*<ClassesTypeCard
+                            classId={123}
                             type="online"
                             code="MKT-203"
                             title="Digital Marketing Strategy 3"
@@ -165,6 +210,7 @@ export default async function Page() {
                             classLink="/classes/1"
                         />
                         <ClassesTypeCard
+                            classId={123}
                             type="online"
                             code="MKT-201"
                             title="Digital Marketing Strategy 1"
@@ -176,6 +222,7 @@ export default async function Page() {
                             classLink="/classes/1"
                         />
                         <ClassesTypeCard
+                            classId={123}
                             type="in-person"
                             code="MKT-202"
                             title="Digital Marketing Strategy 2"
@@ -185,7 +232,7 @@ export default async function Page() {
                             fee="$400"
                             isUpcoming={true}
                             classLink="/classes/1"
-                        />
+                        />*/}
                     </div>
                     <div className="mt-12 text-center">
                         <Link
