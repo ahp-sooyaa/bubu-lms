@@ -21,19 +21,24 @@ export const classStatus = pgEnum("class_status", [
     "canceled",
 ]);
 
+// TODO: Check table columns
 export const classTable = pgTable("class", {
     id: integer().primaryKey().generatedAlwaysAsIdentity(),
+    code: text().notNull().unique(),
+    type: text().notNull(),
     title: text().notNull(),
     description: text().notNull(),
-    teacherId: integer("teacher_id").references(() => userTable.id),
     capacity: integer().notNull(),
-    type: text().notNull(),
-    liveSessionUrl: text("live_session_url"),
     startTime: text("start_time").notNull(),
     durationMinutes: text("duration_minutes").notNull(),
     startDate: text("start_date").notNull(),
     endDate: text("end_date").notNull(),
+    location: text(),
+    platform: text(),
+    fee: integer().notNull(),
+    liveSessionUrl: text("live_session_url"),
     status: classStatus().default("upcoming").notNull(),
+    teacherId: integer("teacher_id").references(() => userTable.id),
     ...timestamps,
 });
 

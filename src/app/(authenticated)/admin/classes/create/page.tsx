@@ -144,6 +144,23 @@ export default async function Page() {
                                             </SelectContent>
                                         </Select>
                                     </div>
+                                    <div className="col-span-2 md:col-span-1">
+                                        <label
+                                            className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
+                                            htmlFor="fee"
+                                        >
+                                            Fee{" "}
+                                            <span className="text-red-500">
+                                                *
+                                            </span>
+                                        </label>
+                                        <Input
+                                            id="fee"
+                                            placeholder="e.g. 100"
+                                            type="number"
+                                            name="fee"
+                                        />
+                                    </div>
                                     <div className="col-span-2">
                                         <label
                                             className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
@@ -156,6 +173,40 @@ export default async function Page() {
                                             name="description"
                                             placeholder="Enter a brief overview of the class curriculum and objectives..."
                                             rows={4}
+                                        />
+                                    </div>
+                                    <div className="col-span-2 md:col-span-1">
+                                        <label
+                                            className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
+                                            htmlFor="location"
+                                        >
+                                            Location{" "}
+                                            <span className="text-red-500">
+                                                *
+                                            </span>
+                                        </label>
+                                        <Input
+                                            id="location"
+                                            placeholder="e.g. 123 Main St"
+                                            type="text"
+                                            name="location"
+                                        />
+                                    </div>
+                                    <div className="col-span-2 md:col-span-1">
+                                        <label
+                                            className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
+                                            htmlFor="platform"
+                                        >
+                                            Platform{" "}
+                                            <span className="text-red-500">
+                                                *
+                                            </span>
+                                        </label>
+                                        <Input
+                                            id="platform"
+                                            placeholder="e.g. Zoom"
+                                            type="text"
+                                            name="platform"
                                         />
                                     </div>
                                 </div>

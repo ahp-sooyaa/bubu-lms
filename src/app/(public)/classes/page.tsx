@@ -12,6 +12,8 @@ import { classTable } from "@/db/schema";
 
 export default async function Page() {
     const classes = await db.select().from(classTable).limit(10);
+    const inPersonClasses = classes.filter((cls) => cls.type === "in-person");
+    const onlineClasses = classes.filter((cls) => cls.type === "online");
 
     return (
         <>
@@ -83,89 +85,94 @@ export default async function Page() {
                     </div>
                     <TabsContent value="all">
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {classes.map((cls) => (
-                                <ClassesTypeCard
-                                    key={cls.id}
-                                    classId={cls.id}
-                                    type={cls.type as "in-person" | "online"}
-                                    code="MKT-203"
-                                    title={cls.title}
-                                    startDate="May 22, 2024"
-                                    schedule="Tue, Thu • 07:00 PM"
-                                    location="Downtown Campus"
-                                    fee="$200"
-                                    isUpcoming={cls.status === "upcoming"}
-                                    classLink={`/classes/${cls.id}`}
-                                />
-                            ))}
+                            {classes.length > 0 ? (
+                                classes.map((cls) => (
+                                    <ClassesTypeCard
+                                        key={cls.id}
+                                        classId={cls.id}
+                                        type={
+                                            cls.type as "in-person" | "online"
+                                        }
+                                        code={cls.code}
+                                        title={cls.title}
+                                        startDate={new Date(
+                                            cls.startDate,
+                                        ).toLocaleDateString("en-US", {
+                                            year: "numeric",
+                                            month: "long",
+                                            day: "numeric",
+                                        })}
+                                        schedule={cls.startTime}
+                                        location={cls.location || ""}
+                                        platform={cls.platform || ""}
+                                        fee={`$${cls.fee}`}
+                                        isUpcoming={cls.status === "upcoming"}
+                                        classLink={`/classes/${cls.id}`}
+                                    />
+                                ))
+                            ) : (
+                                <p>No classes available.</p>
+                            )}
                         </div>
                     </TabsContent>
                     <TabsContent value="in-person">
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            <ClassesTypeCard
-                                classId={123}
-                                type="in-person"
-                                code="MKT-203"
-                                title="Digital Marketing Strategy 3"
-                                startDate="May 22, 2024"
-                                schedule="Tue, Thu • 07:00 PM"
-                                location="Downtown Campus"
-                                fee="$200"
-                                isUpcoming={true}
-                                classLink="/classes/1"
-                            />
-                            <ClassesTypeCard
-                                classId={123}
-                                type="in-person"
-                                code="MKT-203"
-                                title="Digital Marketing Strategy 3"
-                                startDate="April 22, 2024"
-                                schedule="Tue, Thu • 07:00 PM"
-                                location="Downtown Campus"
-                                fee="$200"
-                                isUpcoming={false}
-                                classLink="/classes/1"
-                            />
+                            {inPersonClasses.length > 0 ? (
+                                inPersonClasses.map((cls) => (
+                                    <ClassesTypeCard
+                                        key={cls.id}
+                                        classId={cls.id}
+                                        type="in-person"
+                                        code={cls.code}
+                                        title={cls.title}
+                                        startDate={new Date(
+                                            cls.startDate,
+                                        ).toLocaleDateString("en-US", {
+                                            year: "numeric",
+                                            month: "long",
+                                            day: "numeric",
+                                        })}
+                                        schedule={cls.startTime}
+                                        location={cls.location || ""}
+                                        platform={cls.platform || ""}
+                                        fee={`$${cls.fee}`}
+                                        isUpcoming={cls.status === "upcoming"}
+                                        classLink={`/classes/${cls.id}`}
+                                    />
+                                ))
+                            ) : (
+                                <p>No in-person classes available.</p>
+                            )}
                         </div>
                     </TabsContent>
                     <TabsContent value="online">
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            <ClassesTypeCard
-                                classId={123}
-                                type="online"
-                                code="MKT-203"
-                                title="Digital Marketing Strategy 3"
-                                startDate="May 22, 2024"
-                                schedule="Tue, Thu • 07:00 PM"
-                                platform="Live via zoom"
-                                fee="$200"
-                                isUpcoming={true}
-                                classLink="/classes/1"
-                            />
-                            <ClassesTypeCard
-                                classId={123}
-                                type="online"
-                                code="MKT-203"
-                                title="Digital Marketing Strategy 3"
-                                startDate="April 22, 2024"
-                                schedule="Tue, Thu • 07:00 PM"
-                                platform="Live via zoom"
-                                fee="$200"
-                                isUpcoming={false}
-                                classLink="/classes/1"
-                            />
-                            <ClassesTypeCard
-                                classId={123}
-                                type="online"
-                                code="MKT-203"
-                                title="Digital Marketing Strategy 3"
-                                startDate="May 22, 2024"
-                                schedule="Tue, Thu • 07:00 PM"
-                                platform="Live via zoom"
-                                fee="$200"
-                                isUpcoming={true}
-                                classLink="/classes/1"
-                            />
+                            {onlineClasses.length > 0 ? (
+                                onlineClasses.map((cls) => (
+                                    <ClassesTypeCard
+                                        key={cls.id}
+                                        classId={cls.id}
+                                        type="online"
+                                        code={cls.code}
+                                        title={cls.title}
+                                        startDate={new Date(
+                                            cls.startDate,
+                                        ).toLocaleDateString("en-US", {
+                                            year: "numeric",
+                                            month: "long",
+                                            day: "numeric",
+                                        })}
+                                        schedule={cls.startTime}
+                                        location={cls.location || ""}
+                                        platform={cls.platform || ""}
+                                        fee={`$${cls.fee}`}
+                                        isUpcoming={cls.status === "upcoming"}
+                                        classLink={`/classes/${cls.id}`}
+                                    />
+                                ))
+                            ) : (
+                                <p>No online classes available.</p>
+                            )}
                         </div>
                     </TabsContent>
                     <div className="mt-16 text-center">

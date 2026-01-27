@@ -32,9 +32,8 @@ export default function Page() {
                             Create New Teacher
                         </h1>
                         <p className="text-gray-500 dark:text-gray-400">
-                            Configure the details for the new class offering
-                            below. All fields marked with an asterisk (*) are
-                            required.
+                            Configure the details for the new teacher below. All
+                            fields marked with an asterisk (*) are required.
                         </p>
                     </div>
                 </div>
@@ -45,7 +44,7 @@ export default function Page() {
                         <form
                             action={createTeacher}
                             className="p-6 md:p-10"
-                            id="classCreationForm"
+                            id="teacherCreationForm"
                         >
                             <div className="mb-10">
                                 <h3 className="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2 mb-6">
@@ -67,7 +66,7 @@ export default function Page() {
                                         </label>
                                         <Input
                                             id="name"
-                                            placeholder="pretty good teacher"
+                                            placeholder="John Doe"
                                             type="text"
                                             name="name"
                                         />
@@ -92,7 +91,7 @@ export default function Page() {
                                     <div className="col-span-2 md:col-span-1">
                                         <label
                                             className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
-                                            htmlFor="name"
+                                            htmlFor="password"
                                         >
                                             Password{" "}
                                             <span className="text-red-500">
@@ -101,7 +100,7 @@ export default function Page() {
                                         </label>
                                         <Input
                                             id="password"
-                                            placeholder="pretty good teacher"
+                                            placeholder="********"
                                             type="password"
                                             name="password"
                                         />
@@ -109,7 +108,7 @@ export default function Page() {
                                     <div className="col-span-2 md:col-span-1">
                                         <label
                                             className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
-                                            htmlFor="classType"
+                                            htmlFor="role"
                                         >
                                             Role{" "}
                                             <span className="text-red-500">
@@ -140,7 +139,7 @@ export default function Page() {
                                     <div className="col-span-2 md:col-span-1">
                                         <label
                                             className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
-                                            htmlFor="classType"
+                                            htmlFor="status"
                                         >
                                             Status{" "}
                                             <span className="text-red-500">
@@ -172,7 +171,7 @@ export default function Page() {
                             </div>
                             <div className="flex md:hidden flex-col-reverse sm:flex-row items-center justify-end gap-4 pt-6 border-t border-gray-100 dark:border-gray-700">
                                 <Link
-                                    href="/admin/classes"
+                                    href="/admin/teachers"
                                     className={buttonVariants({
                                         variant: "outline",
                                     })}
@@ -196,7 +195,7 @@ export default function Page() {
                     top-32"
                     >
                         <Link
-                            href="/admin/classes"
+                            href="/admin/teachers"
                             className={cn(
                                 buttonVariants({ variant: "outline" }),
                                 "flex-1",
@@ -206,7 +205,7 @@ export default function Page() {
                         </Link>
                         <Button
                             type="submit"
-                            form="classCreationForm"
+                            form="teacherCreationForm"
                             className="flex-1"
                         >
                             Create Teacher

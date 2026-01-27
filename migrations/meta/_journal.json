@@ -5,15 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1768272065922,
-      "tag": "0000_fearless_night_thrasher",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1769344797498,
-      "tag": "0001_public_scrambler",
+      "when": 1769436293622,
+      "tag": "0000_hard_professor_monster",
       "breakpoints": true
     }
   ]

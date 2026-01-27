@@ -171,7 +171,7 @@ export default async function Page() {
                                     type={
                                         classItem.type as "online" | "in-person"
                                     }
-                                    code="MKT-203"
+                                    code={classItem.code}
                                     title={classItem.title}
                                     startDate={new Date(
                                         classItem.startDate,
@@ -181,13 +181,9 @@ export default async function Page() {
                                         day: "numeric",
                                     })}
                                     schedule={classItem.startTime}
-                                    platform={
-                                        classItem.type === "online"
-                                            ? "Live via zoom"
-                                            : "Campus Classroom"
-                                    }
-                                    location="North Branch"
-                                    fee="$200"
+                                    platform={classItem.platform || ""}
+                                    location={classItem.location || ""}
+                                    fee={`$${classItem.fee}`}
                                     isUpcoming={classItem.status === "upcoming"}
                                     classLink={`/classes/${classItem.id}`}
                                 />
@@ -197,42 +193,6 @@ export default async function Page() {
                                 No upcoming classes available at the moment.
                             </p>
                         )}
-                        {/*<ClassesTypeCard
-                            classId={123}
-                            type="online"
-                            code="MKT-203"
-                            title="Digital Marketing Strategy 3"
-                            startDate="April 22, 2024"
-                            schedule="Tue, Thu • 07:00 PM"
-                            platform="Live via zoom"
-                            fee="$200"
-                            isUpcoming={true}
-                            classLink="/classes/1"
-                        />
-                        <ClassesTypeCard
-                            classId={123}
-                            type="online"
-                            code="MKT-201"
-                            title="Digital Marketing Strategy 1"
-                            startDate="April 22, 2024"
-                            schedule="Tue, Thu • 07:00 PM"
-                            platform="Live via zoom"
-                            fee="$300"
-                            isUpcoming={true}
-                            classLink="/classes/1"
-                        />
-                        <ClassesTypeCard
-                            classId={123}
-                            type="in-person"
-                            code="MKT-202"
-                            title="Digital Marketing Strategy 2"
-                            startDate="April 22, 2024"
-                            schedule="Tue, Thu • 07:00 PM"
-                            location="North Branch"
-                            fee="$400"
-                            isUpcoming={true}
-                            classLink="/classes/1"
-                        />*/}
                     </div>
                     <div className="mt-12 text-center">
                         <Link

@@ -140,9 +140,9 @@ function ClassesTypeCard({
         >
             <CardHeader className="px-6 gap-6">
                 <div className="flex justify-between items-center">
-                    <Badge>{type.toUpperCase().replace("-", " ")}</Badge>
+                    <Badge>{type.toUpperCase().replace("-", " ") || "-"}</Badge>
                     <span className="text-xs font-bold text-primary/60">
-                        {code}
+                        {code || "-"}
                     </span>
                 </div>
                 <CardTitle className="text-2xl font-display font-bold text-gray-900 dark:text-white leading-snug tracking-tight">
@@ -160,7 +160,7 @@ function ClassesTypeCard({
                                 Start Date
                             </p>
                             <p className="text-sm font-bold text-gray-900 dark:text-white">
-                                {startDate}
+                                {startDate || "-"}
                             </p>
                         </div>
                     </div>
@@ -173,7 +173,7 @@ function ClassesTypeCard({
                                 Schedule
                             </p>
                             <p className="text-sm font-bold text-gray-900 dark:text-white">
-                                {schedule}
+                                {schedule || "-"}
                             </p>
                         </div>
                     </div>
@@ -188,7 +188,7 @@ function ClassesTypeCard({
                                         Platform
                                     </p>
                                     <p className="text-sm font-bold text-gray-900 dark:text-white">
-                                        {platform}
+                                        {platform || "-"}
                                     </p>
                                 </div>
                             </>
@@ -205,7 +205,7 @@ function ClassesTypeCard({
                                         Location
                                     </p>
                                     <p className="text-sm font-bold text-gray-900 dark:text-white">
-                                        {location}
+                                        {location || "-"}
                                     </p>
                                 </div>
                             </>
@@ -220,7 +220,7 @@ function ClassesTypeCard({
                             Tuition
                         </p>
                         <p className="text-2xl font-display font-bold text-gray-900 dark:text-white tracking-tight">
-                            {fee}
+                            {fee || "-"}
                         </p>
                     </div>
                     {isUpcoming ? (
