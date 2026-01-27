@@ -12,7 +12,15 @@ import { userTable } from "@/db/schema";
 
 type user = typeof userTable.$inferSelect;
 
-export function TeacherSelect({ teachers }: { teachers: user[] }) {
+interface TeacherSelectProps {
+    teachers: user[];
+    hasError?: boolean;
+}
+
+export function TeacherSelect({
+    teachers,
+    hasError = false,
+}: TeacherSelectProps) {
     const [selectedId, setSelectedId] = useState("");
 
     const selectedTeacher = teachers.find((t) => t.id === Number(selectedId));
@@ -23,7 +31,10 @@ export function TeacherSelect({ teachers }: { teachers: user[] }) {
             value={selectedId}
             onValueChange={(value) => setSelectedId(value ?? "")}
         >
-            <SelectTrigger className="w-full">
+            <SelectTrigger
+                className="w-full"
+                aria-invalid={hasError ? "true" : "false"}
+            >
                 <SelectValue placeholder="Search for an instructor...">
                     {selectedTeacher?.name}
                 </SelectValue>

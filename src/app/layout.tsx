@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import NavLinks from "@/components/nav-links";
 import Link from "next/link";
 import Image from "next/image";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -85,6 +86,7 @@ export default function RootLayout({
                     </header>
 
                     <main className="mt-[81px]">{children}</main>
+                    <Toaster />
 
                     <footer className="bg-primary text-white">
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-10">

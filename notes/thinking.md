@@ -37,9 +37,10 @@ what do i have to do next?
 # class
 [x] update class table schema to match with UI
 [x] check class card rendering
-[ ] form validation error display in admin class create form
-[ ] form input location should disable if class type field is online
-[ ] remove non-display or unnecessary form field
+[x] form validation error display in admin class create form
+[ ] check class edit form/make class edit form work
+[x] form input location should disable if class type field is online
+[x] remove non-display or unnecessary form field
 [ ] implement 'load more class' button in class list page
 
 

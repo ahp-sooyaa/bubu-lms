@@ -8,20 +8,24 @@ import { redirect } from "next/navigation";
 
 const schema = z.object({
     id: z.number(),
-    title: z.string(),
-    description: z.string(),
-    teacherId: z.coerce.number(),
-    capacity: z.coerce.number().positive(),
-    type: z.enum(["online", "in-person"]),
+    title: z.string().trim().min(1, "Title is required"),
+    description: z.string().trim().min(1, "Description is required"),
+    teacherId: z.coerce.number().min(1, "Teacher is required"),
+    capacity: z.coerce.number().positive("Capacity must be a positive number"),
+    type: z.enum(["online", "in-person"], {
+        message: "Please select a class type",
+    }),
     liveSessionUrl: z.string().optional(),
-    startTime: z.string().min(1, "Start time is required"),
-    durationMinutes: z.string(),
-    startDate: z.string().min(1, "Start date is required"),
-    endDate: z.string(),
-    status: z.enum(["upcoming", "ongoing", "completed", "canceled"]),
-    fee: z.coerce.number().nonnegative(),
-    location: z.string().optional(),
-    platform: z.string().optional(),
+    startTime: z.string().trim().min(1, "Start time is required"),
+    durationMinutes: z.string().trim().min(1, "Duration is required"),
+    startDate: z.string().trim().min(1, "Start date is required"),
+    endDate: z.string().trim().min(1, "End date is required"),
+    status: z.enum(["upcoming", "ongoing", "completed", "canceled"], {
+        message: "Please select a status",
+    }),
+    fee: z.coerce.number().positive("Fee must be zero or greater"),
+    location: z.string().trim().optional(),
+    platform: z.string().trim().optional(),
 });
 
 const createClassSchema = schema
@@ -54,11 +58,22 @@ const createClassSchema = schema
         },
     );
 
-export async function createClass(formData: FormData) {
+export async function createClass(prevState: any, formData: FormData) {
     console.log("Form Data:", formData);
     const rawFormData = Object.fromEntries(formData.entries());
 
-    const validatedData = createClassSchema.parse(rawFormData);
+    // Validate the form data
+    const result = createClassSchema.safeParse(rawFormData);
+
+    if (!result.success) {
+        // Return validation errors
+        return {
+            errors: result.error.flatten().fieldErrors,
+            message: "Validation failed. Please check the form fields.",
+        };
+    }
+
+    const validatedData = result.data;
     const code = `CLASS-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
     const location =
         validatedData.type === "in-person"
@@ -69,23 +84,30 @@ export async function createClass(formData: FormData) {
             ? rawFormData.platform?.toString() || null
             : null;
 
-    await db.insert(classTable).values({
-        code: code,
-        title: validatedData.title,
-        description: validatedData.description,
-        teacherId: validatedData.teacherId,
-        capacity: validatedData.capacity,
-        type: validatedData.type,
-        startTime: validatedData.startTime,
-        durationMinutes: validatedData.durationMinutes,
-        startDate: validatedData.startDate,
-        endDate: validatedData.endDate,
-        status: validatedData.status,
-        fee: validatedData.fee,
-        location: location,
-        platform: platform,
-    });
+    try {
+        await db.insert(classTable).values({
+            code: code,
+            title: validatedData.title,
+            description: validatedData.description,
+            teacherId: validatedData.teacherId,
+            capacity: validatedData.capacity,
+            type: validatedData.type,
+            startTime: validatedData.startTime,
+            durationMinutes: validatedData.durationMinutes,
+            startDate: validatedData.startDate,
+            endDate: validatedData.endDate,
+            status: validatedData.status,
+            fee: validatedData.fee,
+            location: location,
+            platform: platform,
+        });
 
-    revalidatePath("/admin/classes");
-    redirect("/admin/classes");
+        revalidatePath("/admin/classes");
+        redirect("/admin/classes");
+    } catch (error) {
+        return {
+            errors: {},
+            message: "Failed to create class. Please try again.",
+        };
+    }
 }
